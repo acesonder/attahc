@@ -821,7 +821,9 @@ function viewPublicRooms() {
                         <p>${room.description}</p>
                         <p><strong>Members:</strong> ${room.members?.length || 0}</p>
                         ${room.hasGame ? `<p>🎮 Game: ${room.gameType}</p>` : ''}
+                        ${room.hasVideo ? '<p style="color: #007bff;">📹 Video Enabled</p>' : ''}
                         <button class="btn-3d" onclick="joinPublicRoom('${room.id}')">Join Room</button>
+                        ${room.hasVideo ? `<button class="btn-3d" onclick="startRoomVideoCall('${room.id}')">📹 Join Video</button>` : ''}
                     </div>
                 `;
             });

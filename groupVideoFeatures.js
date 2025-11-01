@@ -500,6 +500,60 @@ function closeVideoChat() {
     document.getElementById('toggle-audio').textContent = '🎤 Audio';
 }
 
+// Start Room Video Call
+function startRoomVideoCall(roomId) {
+    const rooms = JSON.parse(localStorage.getItem('publicRooms') || '[]');
+    const room = rooms.find(r => r.id === roomId);
+    
+    if (!room) {
+        showFeedback('Error', 'Room not found.', false);
+        return;
+    }
+    
+    if (!room.hasVideo) {
+        showFeedback('Video Disabled', 'Video chat is not enabled for this room.', false);
+        return;
+    }
+    
+    if (!room.members.includes(currentUser.userId)) {
+        room.members.push(currentUser.userId);
+        localStorage.setItem('publicRooms', JSON.stringify(rooms));
+    }
+    
+    closeAllModals();
+    const modal = document.getElementById('video-chat-modal');
+    modal.classList.remove('hidden');
+    
+    const title = document.getElementById('video-chat-title');
+    const videoGrid = document.getElementById('video-grid');
+    
+    title.textContent = `Video Chat - ${room.name}`;
+    
+    // Create video grid for room members
+    const otherMembers = room.members.filter(m => m !== currentUser.userId);
+    
+    videoGrid.innerHTML = `
+        <div class="video-wrapper">
+            <video id="local-video" autoplay muted></video>
+            <span class="video-label">You</span>
+        </div>
+        ${otherMembers.slice(0, 5).map(memberId => `
+            <div class="video-wrapper">
+                <video class="remote-video" autoplay></video>
+                <span class="video-label">${escapeHtml(memberId)}</span>
+            </div>
+        `).join('')}
+    `;
+    
+    // Adjust grid for multiple participants
+    if (otherMembers.length >= 2) {
+        videoGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+    }
+    
+    videoCallActive = true;
+    initializeVideoCall();
+}
+
 // Initialize groups on load
 if (typeof document !== 'undefined') {
     document.addEventListener('DOMContentLoaded', function() {
