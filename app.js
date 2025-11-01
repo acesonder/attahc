@@ -5,6 +5,13 @@ let messages = {};
 let activeChat = null;
 let chatCustomizations = {};
 
+// Security: HTML escape function
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
 // Initialize the app
 document.addEventListener('DOMContentLoaded', function() {
     initializeApp();
