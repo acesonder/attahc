@@ -1,153 +1,292 @@
 # TAHC-U Web Application
 
-A mobile-responsive web application for connecting people nearby with similar interests.
+A comprehensive mobile-responsive web application for connecting people nearby with similar interests, featuring advanced chat capabilities, role-based administration, and unique privacy features.
 
-## Features
-
-- **Splash Screen**: OUTSINCE branding with animated grey clouds on black background
-- **Landing Page**: Features overview and call-to-action
-- **Authentication System**: Login, registration, and password recovery with 3D UI elements
-- **User ID Generation**: Automatic generation in FirstLastMMDDYY format (e.g., MICBRO050684)
-- **Dashboard**: View pinned contacts, nearby users, and similar interests
-- **TAHC-U Matching**: 5-second countdown to match with nearby users with similar interests
-- **Chat System**: Real-time messaging with video/audio call options
-- **Points Reward System**:
-  - +2 points per message sent
-  - +25 points for contact adds (both users)
-  - +10 points for sending friend requests
-  - -10 points for deleting messages
-- **Chat Customization**: Customize background, fonts, colors, bubbles, outlines, shadows, sounds, and usernames
-- **Points Shop**:
-  - 💣 Chat Bomb (100 points) - Disable friend's chat for 30 seconds
-  - ⚡ EMP (250 points) - Disable all chats for 60 seconds
-  - 🔐 Cryptic Message (75 points) - Hangman-style encrypted message
-  - 🎨 Premium Theme (500 points)
-  - 🎭 Avatar Frame (300 points)
-  - ⏰ Double Points (1000 points) - 2x points for 24 hours
-
-## Quick Setup
-
-### Option 1: One-Command Setup (Recommended)
-
-Simply run:
+## 🚀 Quick Start
 
 ```bash
 npm start
 ```
 
-This will:
-1. Install a local web server (if not already installed)
-2. Start the server
-3. Open the app in your default browser
+This will start a local web server and open the application in your browser at `http://localhost:8000`.
 
-### Option 2: Manual Setup
+## ✨ New Features (v2.0)
 
-1. Open `index.html` directly in your web browser, or
-2. Use any web server of your choice:
+### 🕵️ SPY WRITE Mode (FREE!)
+- Privacy-first chat feature
+- Blurs conversations and input while typing
+- Hold Enter to preview messages
+- Toggle with Ctrl+Shift+S or shake device
+- No points required!
 
-```bash
-# Using Python 3
-python -m http.server 8000
+### 👑 Admin Panel & Role System
+6-tier role hierarchy with increasing permissions:
+1. **Standard User** - Basic chat access
+2. **Moderator** - Moderation tools, warnings
+3. **Room Assistant** - Room moderation
+4. **Room Administrator** - Manage rooms, kick users
+5. **Administrator** - Full user & room management
+6. **God Mode** - Complete system access
 
-# Using Python 2
-python -m SimpleHTTPServer 8000
+### 🎨 Font Transformer
+- Transform any user's chat font style
+- 15+ Unicode font styles available
+- 10 points for 10-minute effect
+- Styles include: Fraktur, Script, Bold, Circled, and more!
 
-# Using Node.js http-server
-npx http-server -p 8000
-```
+### 📱 Phone Tap Feature
+- View any user's conversation history
+- Free to view, 150 points to reply
+- Access all conversations
+- Strategic communication tool
 
-Then navigate to `http://localhost:8000` in your browser.
+### 🏠 Public Rooms
+- Create and join public chat rooms
+- Optional game integration
+- Room administrator controls
+- Support for themed rooms
 
-## File Structure
+### 🎮 Room Games
+- Trivia games
+- Interactive challenges
+- Point rewards for winners
+- More games coming soon!
+
+## 📋 Demo Accounts
+
+Test all features with pre-configured accounts:
+
+| Username | Role | Password | Points |
+|----------|------|----------|--------|
+| GODMOD010101 | God Mode | demo123 | 99,999 |
+| ADMADM010101 | Administrator | demo123 | 50,000 |
+| ROOMOD010101 | Room Admin | demo123 | 10,000 |
+| ROAASS010101 | Room Assistant | demo123 | 5,000 |
+| MODMOD010101 | Moderator | demo123 | 2,000 |
+| STASTA010101 | Standard User | demo123 | 100 |
+
+## 🎯 Core Features
+
+- **Splash Screen**: OUTSINCE branding with animated clouds
+- **Landing Page**: Features overview and call-to-action
+- **Authentication**: Login, registration, password recovery with 3D UI
+- **User ID Generation**: Automatic FirstLastMMDDYY format
+- **Dashboard**: Pinned contacts, nearby users, similar interests
+- **TAHC-U Matching**: 5-second countdown to match users
+- **Real-time Chat**: Messaging with video/audio call options
+- **Enhanced Settings**: Comprehensive customization for main chat and individual conversations
+- **Points System**: Earn and spend points on special features
+
+### 💰 Points System
+
+**Earn Points:**
+- +2 per message sent
+- +25 for contact adds (both users)
+- +10 for sending friend requests
+- -10 for deleting messages
+
+**Spend Points:**
+- 💣 Chat Bomb (100 pts) - Disable friend's chat for 30 seconds
+- ⚡ EMP (250 pts) - Disable all chats for 60 seconds
+- 🔐 Cryptic Message (75 pts) - Hangman-style encrypted message
+- 🎨 Premium Theme (500 pts) - Exclusive chat themes
+- 🎭 Avatar Frame (300 pts) - Special profile frame
+- ⏰ Double Points (1000 pts) - 2x points for 24 hours
+- 🎨 Font Transform (10 pts) - Change user's font for 10 minutes
+- 📱 Phone Tap Reply (150 pts) - Reply to tapped conversations
+
+### 🎨 Chat Customization
+
+**Main Chat Settings:**
+- Background color & image
+- Font family and color
+- Message bubble styling
+- Outline and shadow effects
+- Message sounds
+- Chat opacity
+- Message animations
+
+**Individual Conversation Settings:**
+- Unique themes (Dark, Light, Ocean, Sunset, Forest)
+- Text size control
+- Bubble styles (Rounded, Square, Pill)
+- Per-conversation customization
+
+## 📖 Documentation
+
+For complete feature documentation, see [FEATURE_GUIDE.md](./FEATURE_GUIDE.md)
+
+Includes:
+- Detailed feature explanations
+- Step-by-step tutorials
+- Admin panel guide
+- Points system reference
+- Keyboard shortcuts
+- Troubleshooting tips
+- Best practices
+
+## 🗂️ File Structure
 
 ```
 attahc/
-├── index.html      # Main HTML structure
-├── styles.css      # All styling and animations
-├── app.js          # Application logic and functionality
-├── package.json    # NPM configuration for one-command setup
-└── README.md       # This file
+├── index.html          # Main HTML structure with modals
+├── styles.css          # Complete styling and animations
+├── app.js              # Core application logic
+├── fontStyles.js       # Font transformation mappings
+├── adminPanel.js       # Admin panel and role management
+├── enhancedFeatures.js # SPY WRITE, Phone Tap, Font Transformer
+├── package.json        # NPM configuration
+├── README.md           # This file
+└── FEATURE_GUIDE.md    # Complete feature documentation
 ```
 
-## Usage
+## 🎯 Usage
 
-1. **First Time**: The app will show the OUTSINCE splash screen for a few seconds
-2. **Landing Page**: Click "Get Started" to create an account or "Login" to sign in
-3. **Registration**: Fill in your details - a unique user ID will be generated automatically
-4. **Dashboard**: After login, you'll see:
-   - Pinned contacts at the top
-   - Nearby users
-   - Users with similar interests
-   - Custom search options
-5. **TAHC-U Button**: Click to find a match in 5 seconds
-6. **Chat**: Click on any user to start chatting
-7. **Points**: Earn points by messaging and adding contacts
-8. **Customize**: Use the customize button in chat to personalize your experience
-9. **Points Shop**: Spend points on special features
+1. **First Time**: Watch the OUTSINCE splash screen
+2. **Landing Page**: Click "Get Started" or "Login"
+3. **Registration**: Fill details - username auto-generated
+4. **Dashboard**: View contacts, nearby users, similar interests
+5. **TAHC-U Button**: Find a match in 5 seconds
+6. **Chat**: Click any user to start messaging
+7. **Settings**: Click ⚙️ for enhanced settings
+8. **Admin Panel**: Click 👑 (if moderator+)
+9. **Rooms**: Click 🏠 to view public rooms
 
-## User Roles
+## 🛠️ Technologies Used
 
-The system supports multiple user roles (currently set to "Client" for all new users):
-- Admin
-- Manager
-- Worker
-- Client
+- HTML5 with semantic markup
+- CSS3 with 3D transforms and animations
+- Vanilla JavaScript (ES6+)
+- LocalStorage for data persistence
+- No external dependencies
 
-## Browser Compatibility
+## 🔒 Security Features
+
+- HTML escape for user input prevention of XSS
+- Password validation (minimum 6 characters)
+- Security questions for password recovery
+- Role-based access control (RBAC)
+- User verification for password reset
+
+## 🌐 Browser Compatibility
 
 Works on all modern browsers:
 - Chrome (recommended)
 - Firefox
 - Safari
 - Edge
+- Mobile browsers (fully responsive)
 
-Fully mobile-responsive for smartphones and tablets.
+## 🎮 Advanced Features
 
-## Demo Credentials
+### SPY WRITE
+Press `Ctrl+Shift+S` to toggle blur mode. Protects your privacy while chatting in public spaces.
 
-For testing, you can create a new account or use the registration system which will generate credentials based on your name and birthdate.
+### Phone Tap
+Access conversation histories of other users. View for free, pay 150 points to reply.
 
-Example:
-- First Name: Michael
-- Last Name: Brown
-- DOB: 05/06/1984
-- Generated Username: MICBRO050684
+### Font Transformer
+Apply Unicode font transformations to any user's chat for 10 minutes. Over 15 styles available.
 
-## Security Features
+### Admin Panel
+Role-based administration with 6 permission levels. Manage users, rooms, and moderation.
 
-- Password recovery with security questions
-- Secure password validation (minimum 6 characters)
-- Local storage for data persistence
-- User verification for password reset
+## 🔧 Development
 
-## Technologies Used
-
-- HTML5
-- CSS3 (with 3D transforms and animations)
-- Vanilla JavaScript (no frameworks required)
-- LocalStorage for data persistence
-
-## Development
-
-All data is stored locally in the browser's localStorage. To clear data:
-
+### Clear All Data
+To reset the application:
 1. Open browser developer tools (F12)
 2. Go to Application/Storage tab
 3. Clear localStorage
 
-## Future Enhancements
+### Adding New Features
+- Font styles: Add to `fontStyles.js`
+- Admin functions: Extend `adminPanel.js`
+- Enhanced features: Add to `enhancedFeatures.js`
+- UI components: Update `index.html` and `styles.css`
+
+## 📸 Screenshots
+
+(Screenshots will be added here showing various features in action)
+
+### Main Features
+- Login/Registration screens
+- Dashboard with role display
+- Chat interface with customization
+- SPY WRITE mode demonstration
+- Admin panel views
+- Public rooms interface
+- Font transformer selector
+- Phone Tap feature
+
+## 🆘 Support
+
+### Common Issues
+
+**Q: Can't access Admin Panel?**
+A: Requires Moderator (Level 2+) role. Standard users don't have access.
+
+**Q: SPY WRITE not working?**
+A: Press Ctrl+Shift+S or enable in Enhanced Settings while in an active chat.
+
+**Q: Font effects not visible?**
+A: Target user must log in for effects to apply. Effects last 10 minutes.
+
+**Q: Need more points?**
+A: Send messages (+2 each), add contacts (+25), or use demo accounts with high point balances.
+
+## 🚦 Feature Status
+
+### ✅ Fully Implemented
+- Authentication & registration
+- Password recovery system
+- Points earning and spending
+- Complete chat customization
+- Admin panel with 6 role levels
+- Enhanced settings system
+- SPY WRITE privacy mode
+- Phone Tap feature
+- Font transformer (15+ styles)
+- Public rooms with games
+- 6 demo accounts
+
+### ⚠️ Placeholder/Simulated
+- Video/Audio calls (WebRTC needed)
+- Device shake detection (keyboard shortcut used)
+- NFC phone tapping (username-based simulation)
+- Real-time location (simulated)
+
+## 🔮 Future Enhancements
 
 - WebRTC integration for real video/audio calls
-- Real-time database integration
-- Geolocation for actual nearby user detection
+- Additional Unicode font styles
+- More room game types
+- Advanced moderation tools
+- Mobile app (React Native)
 - Push notifications
-- Extended points system features
-- Social sharing capabilities
+- Cloud database integration
+- Real-time synchronization
 
-## License
+## 📄 License
 
 MIT License
 
-## Support
+## 👥 Credits
 
-For issues or questions, please open an issue in the repository.
+**TAHC-U** - Connect with people nearby
+- Developed by: OUTSINCE  
+- Version: 2.0
+- Repository: acesonder/attahc
+
+## 🔗 Quick Links
+
+- [Complete Feature Guide](./FEATURE_GUIDE.md) - Detailed documentation
+- [Demo Accounts](#-demo-accounts) - Test with pre-configured users
+- [Points System](#-points-system) - Earning and spending guide
+- [Admin Panel](#-admin-panel--role-system) - Role-based administration
+
+---
+
+**Get Started Now**: `npm start`
+
+Experience the next generation of proximity-based social networking with advanced privacy features, comprehensive customization, and role-based community management!
