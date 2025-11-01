@@ -30,7 +30,7 @@ function openGroupList() {
 }
 
 // Show Group Tab
-function showGroupTab(tabName) {
+function showGroupTab(tabName, clickedButton) {
     document.querySelectorAll('.group-tab-content').forEach(tab => {
         tab.classList.add('hidden');
     });
@@ -39,7 +39,9 @@ function showGroupTab(tabName) {
     });
     
     document.getElementById(tabName).classList.remove('hidden');
-    event.target.classList.add('active');
+    if (clickedButton) {
+        clickedButton.classList.add('active');
+    }
 }
 
 // Load My Groups
@@ -300,7 +302,8 @@ function sendGroupMessage() {
     
     // Add points
     currentUser.points += 2;
-    updatePointsDisplay();
+    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+    document.getElementById('user-points').textContent = `Points: ${currentUser.points}`;
     
     // Display message
     const chatMessages = document.getElementById('chat-messages');
