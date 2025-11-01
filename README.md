@@ -12,6 +12,21 @@ This will start a local web server and open the application in your browser at `
 
 ## ✨ New Features (v2.0)
 
+### 📹 Video Chat (Enhanced!)
+- **One-on-One Video Calls** - Private video calls with any contact
+- **Group Video Chat** - Multi-participant video calls in groups
+- **Room Video Support** - Video chat in public rooms
+- Real-time controls: Toggle video/audio, end call
+- Simulated interface (WebRTC integration ready)
+
+### 👥 Group Chats
+- **Create Custom Groups** - Build your own chat communities
+- **Public & Private Groups** - Choose who can join
+- **Invite System** - Invite specific users to private groups
+- **Group Video Calls** - Enable video for group conversations
+- Multi-member chat with real-time messaging
+- See all group members and activity
+
 ### 🕵️ SPY WRITE Mode (FREE!)
 - Privacy-first chat feature
 - Blurs conversations and input while typing
@@ -129,15 +144,16 @@ Includes:
 
 ```
 attahc/
-├── index.html          # Main HTML structure with modals
-├── styles.css          # Complete styling and animations
-├── app.js              # Core application logic
-├── fontStyles.js       # Font transformation mappings
-├── adminPanel.js       # Admin panel and role management
-├── enhancedFeatures.js # SPY WRITE, Phone Tap, Font Transformer
-├── package.json        # NPM configuration
-├── README.md           # This file
-└── FEATURE_GUIDE.md    # Complete feature documentation
+├── index.html             # Main HTML structure with modals
+├── styles.css             # Complete styling and animations
+├── app.js                 # Core application logic
+├── fontStyles.js          # Font transformation mappings
+├── adminPanel.js          # Admin panel and role management
+├── enhancedFeatures.js    # SPY WRITE, Phone Tap, Font Transformer
+├── groupVideoFeatures.js  # Group chats and video call functionality
+├── package.json           # NPM configuration
+├── README.md              # This file
+└── FEATURE_GUIDE.md       # Complete feature documentation
 ```
 
 ## 🎯 Usage
@@ -148,9 +164,11 @@ attahc/
 4. **Dashboard**: View contacts, nearby users, similar interests
 5. **TAHC-U Button**: Find a match in 5 seconds
 6. **Chat**: Click any user to start messaging
-7. **Settings**: Click ⚙️ for enhanced settings
-8. **Admin Panel**: Click 👑 (if moderator+)
-9. **Rooms**: Click 🏠 to view public rooms
+7. **Video Call**: Click 📹 Video in any chat to start video call
+8. **Groups**: Click 👥 Groups to create or join group chats
+9. **Settings**: Click ⚙️ for enhanced settings
+10. **Admin Panel**: Click 👑 (if moderator+)
+11. **Rooms**: Click 🏠 to view public rooms
 
 ## 🛠️ Technologies Used
 
@@ -249,9 +267,12 @@ A: Send messages (+2 each), add contacts (+25), or use demo accounts with high p
 - Font transformer (15+ styles)
 - Public rooms with games
 - 6 demo accounts
+- **Group chat creation (public & private)**
+- **Group invite system**
+- **Video chat interface (one-on-one & group)**
 
 ### ⚠️ Placeholder/Simulated
-- Video/Audio calls (WebRTC needed)
+- Video/Audio calls (UI ready, WebRTC integration needed for real streams)
 - Device shake detection (keyboard shortcut used)
 - NFC phone tapping (username-based simulation)
 - Real-time location (simulated)
