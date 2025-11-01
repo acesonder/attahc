@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAHC-U - Connect Nearby</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        <div class="cloud cloud3"></div>
+        <h1 class="splash-title">OUTSINCE</h1>
+    </div>
+
+    <!-- Landing Page -->
+    <div id="landing-page" class="hidden">
+        <header>
+            <div class="logo-3d">TAHC-U</div>
+            <nav>
+                <button class="nav-btn" onclick="showLogin()">Login</button>
+                <button class="nav-btn cta-btn" onclick="showRegister()">Get Started</button>
+            </nav>
+        </header>
+        
+        <section class="hero">
+            <h1 class="hero-title">Connect with People Nearby</h1>
+            <p class="hero-subtitle">Match, Chat, and Earn Rewards with TAHC-U</p>
+            <button class="cta-button" onclick="showRegister()">Join TAHC-U Now</button>
+        </section>
+
+        <section class="features">
+            <h2>Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>🎯 Smart Matching</h3>
+                    <p>Find people nearby with similar interests in just 5 seconds</p>
+                </div>
+                <div class="feature-card">
+                    <h3>💬 Enhanced Chat</h3>
+                    <p>Video, audio, and fully customizable chat experience</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⭐ Points & Rewards</h3>
+                    <p>Earn points for messaging and unlock special features</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎨 Customization</h3>
+                    <p>Personalize your chat with colors, fonts, and themes</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal hidden">
+        <div class="modal-content modal-3d">
+            <span class="close" onclick="closeModal('login-modal')">&times;</span>
+            <div class="logo-3d">TAHC-U</div>
+            <h2>Login</h2>
+            <form id="login-form">
+                <input type="text" id="login-username" placeholder="Username" required>
+                <input type="password" id="login-password" placeholder="Password" required>
+                <button type="submit" class="btn-3d">Login</button>
+            </form>
+            <div class="modal-links">
+                <a href="#" onclick="showPasswordRecovery()">Forgot Password?</a>
+                <a href="#" onclick="showRegister()">Create Account</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="register-modal" class="modal hidden">
+        <div class="modal-content modal-3d">
+            <span class="close" onclick="closeModal('register-modal')">&times;</span>
+            <div class="logo-3d">TAHC-U</div>
+            <h2>Create Account</h2>
+            <form id="register-form">
+                <input type="text" id="reg-firstname" placeholder="First Name" required>
+                <input type="text" id="reg-lastname" placeholder="Last Name" required>
+                <input type="date" id="reg-dob" placeholder="Date of Birth" required>
+                <select id="reg-security-question" required>
+                    <option value="">Select Security Question</option>
+                    <option value="pet">What was your first pet's name?</option>
+                    <option value="city">What city were you born in?</option>
+                    <option value="school">What was your elementary school's name?</option>
+                    <option value="color">What is your favorite color?</option>
+                </select>
+                <input type="text" id="reg-security-answer" placeholder="Security Answer" required>
+                <input type="password" id="reg-password" placeholder="Password" required>
+                <input type="password" id="reg-confirm-password" placeholder="Confirm Password" required>
+                <button type="submit" class="btn-3d">Create Account</button>
+            </form>
+            <div class="modal-links">
+                <a href="#" onclick="showLogin()">Already have an account? Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Recovery Modal -->
+    <div id="recovery-modal" class="modal hidden">
+        <div class="modal-content modal-3d">
+            <span class="close" onclick="closeModal('recovery-modal')">&times;</span>
+            <div class="logo-3d">TAHC-U</div>
+            <h2>Password Recovery</h2>
+            <form id="recovery-form">
+                <input type="text" id="recovery-firstname" placeholder="First Name" required>
+                <input type="text" id="recovery-lastname" placeholder="Last Name" required>
+                <input type="date" id="recovery-dob" placeholder="Date of Birth" required>
+                <button type="button" class="btn-3d" onclick="verifyUser()">Verify Identity</button>
+            </form>
+            <div id="recovery-step2" class="hidden">
+                <p id="security-question-display"></p>
+                <input type="text" id="recovery-answer" placeholder="Your Answer">
+                <button type="button" class="btn-3d" onclick="verifyAnswer()">Submit Answer</button>
+            </div>
+            <div id="recovery-step3" class="hidden">
+                <p>Your username: <strong id="recovered-username"></strong></p>
+                <input type="password" id="new-password" placeholder="New Password" required>
+                <input type="password" id="confirm-new-password" placeholder="Confirm New Password" required>
+                <button type="button" class="btn-3d" onclick="resetPassword()">Reset Password</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div id="feedback-modal" class="modal hidden">
+        <div class="modal-content modal-3d feedback">
+            <span class="close" onclick="closeModal('feedback-modal')">&times;</span>
+            <h2 id="feedback-title"></h2>
+            <p id="feedback-message"></p>
+            <button class="btn-3d" onclick="closeModal('feedback-modal')">OK</button>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="hidden">
+        <nav class="dashboard-nav">
+            <div class="logo-3d">TAHC-U</div>
+            <button class="tahcu-match-btn" onclick="startTahcuMatch()">
+                <span id="countdown-text">⚡ TAHC-U</span>
+            </button>
+            <div class="user-info">
+                <span id="user-points">Points: 0</span>
+                <span id="username-display"></span>
+                <button class="btn-logout" onclick="logout()">Logout</button>
+            </div>
+        </nav>
+
+        <div class="dashboard-content">
+            <aside class="sidebar">
+                <section class="contacts-section">
+                    <h3>📌 Pinned Contacts</h3>
+                    <div id="pinned-contacts" class="contacts-list"></div>
+                </section>
+
+                <section class="contacts-section">
+                    <h3>📍 Close By</h3>
+                    <div id="nearby-users" class="contacts-list"></div>
+                </section>
+
+                <section class="contacts-section">
+                    <h3>🎯 Similar Interests</h3>
+                    <div id="similar-interests" class="contacts-list"></div>
+                </section>
+
+                <section class="search-section">
+                    <h3>🔍 Custom Search</h3>
+                    <input type="text" id="search-users" placeholder="Search users...">
+                    <select id="filter-category">
+                        <option value="">All Categories</option>
+                        <option value="sports">Sports</option>
+                        <option value="music">Music</option>
+                        <option value="gaming">Gaming</option>
+                        <option value="tech">Technology</option>
+                        <option value="art">Art</option>
+                    </select>
+                    <button class="btn-3d" onclick="searchUsers()">Search</button>
+                </section>
+            </aside>
+
+            <main class="main-content">
+                <div id="chat-window" class="hidden">
+                    <div class="chat-header">
+                        <h3 id="chat-contact-name"></h3>
+                        <div class="chat-controls">
+                            <button class="chat-btn" onclick="startVideoCall()">📹 Video</button>
+                            <button class="chat-btn" onclick="startAudioCall()">🎤 Audio</button>
+                            <button class="chat-btn tahcu-chat-btn" onclick="startTahcuInChat()">⚡ TAHC-U</button>
+                            <button class="chat-btn" onclick="openChatCustomization()">🎨 Customize</button>
+                            <button class="chat-btn" onclick="openPointsMenu()">⭐ Points</button>
+                            <button class="close-chat" onclick="closeChat()">&times;</button>
+                        </div>
+                    </div>
+                    <div id="chat-messages" class="chat-messages"></div>
+                    <div class="chat-input-container">
+                        <input type="text" id="chat-input" placeholder="Type a message...">
+                        <button onclick="sendMessage()">Send</button>
+                        <button onclick="deleteLastMessage()">🗑️</button>
+                    </div>
+                </div>
+
+                <div id="welcome-screen">
+                    <h2>Welcome to TAHC-U!</h2>
+                    <p>Select a contact to start chatting or use the TAHC-U button to find a match!</p>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Chat Customization Modal -->
+    <div id="customization-modal" class="modal hidden">
+        <div class="modal-content modal-3d">
+            <span class="close" onclick="closeModal('customization-modal')">&times;</span>
+            <h2>Customize Chat</h2>
+            <div class="customization-grid">
+                <div class="custom-option">
+                    <label>Background Color:</label>
+                    <input type="color" id="chat-bg-color" value="#ffffff">
+                </div>
+                <div class="custom-option">
+                    <label>Font Family:</label>
+                    <select id="chat-font">
+                        <option value="Arial">Arial</option>
+                        <option value="Helvetica">Helvetica</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Courier New">Courier New</option>
+                        <option value="Comic Sans MS">Comic Sans MS</option>
+                    </select>
+                </div>
+                <div class="custom-option">
+                    <label>Font Color:</label>
+                    <input type="color" id="chat-font-color" value="#000000">
+                </div>
+                <div class="custom-option">
+                    <label>Bubble Color:</label>
+                    <input type="color" id="chat-bubble-color" value="#007bff">
+                </div>
+                <div class="custom-option">
+                    <label>Outline Color:</label>
+                    <input type="color" id="chat-outline-color" value="#0056b3">
+                </div>
+                <div class="custom-option">
+                    <label>Shadow Color:</label>
+                    <input type="color" id="chat-shadow-color" value="#000000">
+                </div>
+                <div class="custom-option">
+                    <label>Message Sound:</label>
+                    <select id="chat-sound">
+                        <option value="beep">Beep</option>
+                        <option value="chime">Chime</option>
+                        <option value="ding">Ding</option>
+                        <option value="none">None</option>
+                    </select>
+                </div>
+                <div class="custom-option">
+                    <label>Display Username:</label>
+                    <input type="text" id="chat-username" placeholder="Custom username">
+                </div>
+            </div>
+            <button class="btn-3d" onclick="applyChatCustomization()">Apply</button>
+        </div>
+    </div>
+
+    <!-- Points Menu Modal -->
+    <div id="points-menu-modal" class="modal hidden">
+        <div class="modal-content modal-3d">
+            <span class="close" onclick="closeModal('points-menu-modal')">&times;</span>
+            <h2>Points Shop</h2>
+            <div id="current-points">Your Points: <span id="points-display">0</span></div>
+            <div class="points-items">
+                <div class="points-item">
+                    <h4>💣 Chat Bomb</h4>
+                    <p>Disable a friend's chat for 30 seconds</p>
+                    <p class="price">Cost: 100 points</p>
+                    <button class="btn-3d" onclick="buyItem('bomb', 100)">Buy</button>
+                </div>
+                <div class="points-item">
+                    <h4>⚡ EMP</h4>
+                    <p>Disable all chats for 60 seconds</p>
+                    <p class="price">Cost: 250 points</p>
+                    <button class="btn-3d" onclick="buyItem('emp', 250)">Buy</button>
+                </div>
+                <div class="points-item">
+                    <h4>🔐 Cryptic Message</h4>
+                    <p>Send a hangman-style encrypted message</p>
+                    <p class="price">Cost: 75 points</p>
+                    <button class="btn-3d" onclick="buyItem('cryptic', 75)">Buy</button>
+                </div>
+                <div class="points-item">
+                    <h4>🎨 Premium Theme</h4>
+                    <p>Unlock exclusive chat themes</p>
+                    <p class="price">Cost: 500 points</p>
+                    <button class="btn-3d" onclick="buyItem('theme', 500)">Buy</button>
+                </div>
+                <div class="points-item">
+                    <h4>🎭 Avatar Frame</h4>
+                    <p>Special profile frame</p>
+                    <p class="price">Cost: 300 points</p>
+                    <button class="btn-3d" onclick="buyItem('frame', 300)">Buy</button>
+                </div>
+                <div class="points-item">
+                    <h4>⏰ Double Points</h4>
+                    <p>2x points for 24 hours</p>
+                    <p class="price">Cost: 1000 points</p>
+                    <button class="btn-3d" onclick="buyItem('double', 1000)">Buy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

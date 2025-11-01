@@ -1,0 +1,17 @@
+{
+  "name": "tahc-u",
+  "version": "1.0.0",
+  "description": "TAHC-U - Connect with people nearby",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server -p 8000 -o"
+  },
+  "keywords": [
+    "chat",
+    "social",
+    "nearby",
+    "matching"
+  ],
+  "author": "OUTSINCE",
+  "license": "MIT"
+}
