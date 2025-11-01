@@ -141,7 +141,7 @@ function handleRegistration() {
         securityAnswer,
         password,
         points: 0,
-        role: 'Client',
+        role: 'STANDARD',
         contacts: [],
         pinnedContacts: [],
         interests: [],
@@ -260,8 +260,40 @@ function showDashboard() {
     document.getElementById('username-display').textContent = currentUser.userId;
     document.getElementById('user-points').textContent = `Points: ${currentUser.points}`;
     
+    // Display role
+    const roleDisplay = document.getElementById('user-role-display');
+    if (roleDisplay && USER_ROLES && currentUser.role) {
+        const roleName = USER_ROLES[currentUser.role]?.name || 'Standard User';
+        roleDisplay.textContent = roleName;
+        roleDisplay.style.color = getRoleColor(currentUser.role);
+    }
+    
+    // Show admin button if user has moderator+ role
+    const adminBtn = document.getElementById('admin-btn');
+    if (adminBtn && USER_ROLES && currentUser.role) {
+        const roleLevel = USER_ROLES[currentUser.role]?.level || 1;
+        adminBtn.style.display = roleLevel >= 2 ? 'inline-block' : 'none';
+    }
+    
     loadContacts();
     createDemoUsers();
+    
+    // Check for font effects
+    if (typeof checkFontEffects === 'function') {
+        checkFontEffects();
+    }
+}
+
+function getRoleColor(role) {
+    const colors = {
+        'GOD_MODE': '#FFD700',
+        'ADMIN': '#FF6B6B',
+        'ROOM_ADMIN': '#4ECDC4',
+        'ROOM_ASSISTANT': '#95E1D3',
+        'MODERATOR': '#A8E6CF',
+        'STANDARD': '#CCCCCC'
+    };
+    return colors[role] || '#CCCCCC';
 }
 
 function createDemoUsers() {
@@ -770,4 +802,49 @@ function loadFromLocalStorage() {
             showDashboard();
         }, 4000);
     }
+}
+
+// View public rooms
+function viewPublicRooms() {
+    if (typeof viewRooms === 'function') {
+        viewRooms();
+    } else {
+        const rooms = JSON.parse(localStorage.getItem('publicRooms') || '[]');
+        if (rooms.length === 0) {
+            showFeedback('Public Rooms', 'No public rooms available yet. Create one from the admin panel!');
+        } else {
+            let html = '<div class="rooms-list"><h3>Public Rooms</h3>';
+            rooms.forEach(room => {
+                html += `
+                    <div class="room-card">
+                        <h4>${room.name}</h4>
+                        <p>${room.description}</p>
+                        <p><strong>Members:</strong> ${room.members?.length || 0}</p>
+                        ${room.hasGame ? `<p>🎮 Game: ${room.gameType}</p>` : ''}
+                        <button class="btn-3d" onclick="joinPublicRoom('${room.id}')">Join Room</button>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            showFeedback('Public Rooms', html);
+        }
+    }
+}
+
+function joinPublicRoom(roomId) {
+    const rooms = JSON.parse(localStorage.getItem('publicRooms') || '[]');
+    const room = rooms.find(r => r.id === roomId);
+    
+    if (!room) {
+        showFeedback('Error', 'Room not found.', false);
+        return;
+    }
+    
+    if (!room.members.includes(currentUser.userId)) {
+        room.members.push(currentUser.userId);
+        localStorage.setItem('publicRooms', JSON.stringify(rooms));
+    }
+    
+    closeModal('feedback-modal');
+    showFeedback('Joined Room', `Welcome to ${room.name}! ${room.hasGame ? 'Game: ' + room.gameType : ''}`);
 }

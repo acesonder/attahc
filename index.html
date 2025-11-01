@@ -146,6 +146,10 @@
             <div class="user-info">
                 <span id="user-points">Points: 0</span>
                 <span id="username-display"></span>
+                <span id="user-role-display" class="user-role"></span>
+                <button class="btn-3d btn-small" onclick="openEnhancedSettings()">⚙️ Settings</button>
+                <button class="btn-3d btn-small" id="admin-btn" onclick="openAdminPanel()" style="display:none;">👑 Admin</button>
+                <button class="btn-3d btn-small" onclick="viewPublicRooms()">🏠 Rooms</button>
                 <button class="btn-logout" onclick="logout()">Logout</button>
             </div>
         </nav>
@@ -312,6 +316,110 @@
         </div>
     </div>
 
+    <!-- Admin Panel Modal -->
+    <div id="admin-panel-modal" class="modal hidden">
+        <div class="modal-content modal-3d admin-panel">
+            <span class="close" onclick="closeModal('admin-panel-modal')">&times;</span>
+            <div id="admin-panel-content"></div>
+        </div>
+    </div>
+
+    <!-- Enhanced Settings Modal -->
+    <div id="enhanced-settings-modal" class="modal hidden">
+        <div class="modal-content modal-3d">
+            <span class="close" onclick="closeModal('enhanced-settings-modal')">&times;</span>
+            <h2>⚙️ Enhanced Settings</h2>
+            <div class="settings-content">
+                <div class="setting-section">
+                    <h3>Main Chat Window Settings</h3>
+                    <div class="setting-item">
+                        <label>Background Image:</label>
+                        <input type="text" id="main-chat-bg-image" placeholder="Enter image URL">
+                    </div>
+                    <div class="setting-item">
+                        <label>Chat Opacity:</label>
+                        <input type="range" id="main-chat-opacity" min="0" max="100" value="100">
+                    </div>
+                    <div class="setting-item">
+                        <label>Message Animation:</label>
+                        <select id="message-animation">
+                            <option value="none">None</option>
+                            <option value="slide">Slide In</option>
+                            <option value="fade">Fade In</option>
+                            <option value="bounce">Bounce</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="setting-section">
+                    <h3>Individual Conversation Settings</h3>
+                    <p>These settings apply to the current conversation only</p>
+                    <div class="setting-item">
+                        <label>Conversation Theme:</label>
+                        <select id="conv-theme">
+                            <option value="default">Default</option>
+                            <option value="dark">Dark Mode</option>
+                            <option value="light">Light Mode</option>
+                            <option value="ocean">Ocean</option>
+                            <option value="sunset">Sunset</option>
+                            <option value="forest">Forest</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <label>Text Size:</label>
+                        <select id="conv-text-size">
+                            <option value="small">Small</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="large">Large</option>
+                            <option value="xlarge">Extra Large</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <label>Bubble Style:</label>
+                        <select id="conv-bubble-style">
+                            <option value="rounded">Rounded</option>
+                            <option value="square">Square</option>
+                            <option value="pill">Pill</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="setting-section">
+                    <h3>🕵️ SPY WRITE Mode</h3>
+                    <p>Blur conversations for privacy. Press Ctrl+Shift+S to toggle or shake device.</p>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="spy-write-toggle" onchange="toggleSpyWrite()">
+                            Enable SPY WRITE (FREE)
+                        </label>
+                    </div>
+                    <p class="feature-note">• Blurs chat when typing<br>• Hold Enter to preview<br>• Shake to toggle on/off</p>
+                </div>
+
+                <div class="setting-section">
+                    <h3>Advanced Features</h3>
+                    <div class="features-grid">
+                        <button class="btn-3d" onclick="simulatePhoneTap()">
+                            📱 Phone Tap<br><small>View others' conversations</small>
+                        </button>
+                        <button class="btn-3d" onclick="applyFontStyleToUser()">
+                            🎨 Font Transformer<br><small>10 pts - 10 min effect</small>
+                        </button>
+                        <button class="btn-3d" onclick="openChatCustomization()">
+                            🖌️ Chat Customization<br><small>Colors & Fonts</small>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-3d" onclick="saveEnhancedSettings()">Save Settings</button>
+        </div>
+    </div>
+
+    <!-- Font Style Selector (injected dynamically) -->
+    
+    <script src="fontStyles.js"></script>
+    <script src="adminPanel.js"></script>
+    <script src="enhancedFeatures.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
