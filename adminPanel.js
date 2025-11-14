@@ -260,7 +260,10 @@ function viewRooms() {
             <h4>${room.name}</h4>
             <p>${room.description}</p>
             <p>Members: ${room.members?.length || 0}</p>
+            ${room.hasVideo ? '<p style="color: #007bff;">📹 Video Enabled</p>' : ''}
+            ${room.hasGame ? '<p style="color: #28a745;">🎮 Game: ' + room.gameType + '</p>' : ''}
             <button onclick="joinRoom('${room.id}')">Join</button>
+            ${room.hasVideo ? `<button onclick="startRoomVideoCall('${room.id}')">📹 Join Video</button>` : ''}
         </div>`;
     });
     html += '</div>';
@@ -274,6 +277,7 @@ function createPublicRoom() {
     
     const description = prompt('Enter room description:');
     const hasGame = confirm('Include a game in this room?');
+    const hasVideo = confirm('Enable video chat in this room?');
     
     const rooms = getPublicRooms();
     const newRoom = {
@@ -284,13 +288,14 @@ function createPublicRoom() {
         members: [currentUser.userId],
         hasGame: hasGame,
         gameType: hasGame ? 'trivia' : null,
+        hasVideo: hasVideo,
         created: Date.now()
     };
     
     rooms.push(newRoom);
     localStorage.setItem('publicRooms', JSON.stringify(rooms));
     
-    showFeedback('Room Created', `Public room "${name}" has been created successfully!`);
+    showFeedback('Room Created', `Public room "${name}" has been created successfully!${hasVideo ? ' Video chat enabled!' : ''}`);
 }
 
 function deleteRoom() {

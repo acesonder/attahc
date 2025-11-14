@@ -150,6 +150,7 @@
                 <button class="btn-3d btn-small" onclick="openEnhancedSettings()">⚙️ Settings</button>
                 <button class="btn-3d btn-small" id="admin-btn" onclick="openAdminPanel()" style="display:none;">👑 Admin</button>
                 <button class="btn-3d btn-small" onclick="viewPublicRooms()">🏠 Rooms</button>
+                <button class="btn-3d btn-small" onclick="openGroupList()">👥 Groups</button>
                 <button class="btn-logout" onclick="logout()">Logout</button>
             </div>
         </nav>
@@ -417,9 +418,93 @@
 
     <!-- Font Style Selector (injected dynamically) -->
     
+    <!-- Create Group Chat Modal -->
+    <div id="create-group-modal" class="modal hidden">
+        <div class="modal-content modal-3d">
+            <span class="close" onclick="closeModal('create-group-modal')">&times;</span>
+            <h2>Create Group Chat</h2>
+            <form id="create-group-form">
+                <input type="text" id="group-name" placeholder="Group Name" required>
+                <textarea id="group-description" placeholder="Group Description (optional)" rows="3"></textarea>
+                <div class="custom-option">
+                    <label>Group Type:</label>
+                    <select id="group-type" required>
+                        <option value="private">Private (Invite Only)</option>
+                        <option value="public">Public (Anyone can join)</option>
+                    </select>
+                </div>
+                <div class="custom-option">
+                    <label>
+                        <input type="checkbox" id="group-video-enabled">
+                        Enable Video Chat
+                    </label>
+                </div>
+                <div id="invite-users-section">
+                    <h4>Invite Users</h4>
+                    <div id="user-invite-list" class="user-list"></div>
+                </div>
+                <button type="submit" class="btn-3d">Create Group</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Video Chat Modal -->
+    <div id="video-chat-modal" class="modal hidden">
+        <div class="modal-content modal-3d video-modal">
+            <span class="close" onclick="closeVideoChat()">&times;</span>
+            <h2 id="video-chat-title">Video Chat</h2>
+            <div class="video-container">
+                <div class="video-grid" id="video-grid">
+                    <div class="video-wrapper">
+                        <video id="local-video" autoplay muted></video>
+                        <span class="video-label">You</span>
+                    </div>
+                    <div class="video-wrapper">
+                        <video id="remote-video" autoplay></video>
+                        <span class="video-label" id="remote-name">Connecting...</span>
+                    </div>
+                </div>
+                <div class="video-controls">
+                    <button class="video-control-btn" id="toggle-video" onclick="toggleVideo()">
+                        📹 Video
+                    </button>
+                    <button class="video-control-btn" id="toggle-audio" onclick="toggleAudio()">
+                        🎤 Audio
+                    </button>
+                    <button class="video-control-btn end-call" onclick="endVideoCall()">
+                        📞 End Call
+                    </button>
+                </div>
+                <div class="video-status" id="video-status">
+                    Simulated Video Chat - WebRTC integration needed for real calls
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Group Chat List Modal -->
+    <div id="group-list-modal" class="modal hidden">
+        <div class="modal-content modal-3d">
+            <span class="close" onclick="closeModal('group-list-modal')">&times;</span>
+            <h2>Group Chats</h2>
+            <button class="btn-3d" onclick="openCreateGroup()">+ Create New Group</button>
+            <div class="tabs">
+                <button class="tab-btn active" onclick="showGroupTab('my-groups', this)">My Groups</button>
+                <button class="tab-btn" onclick="showGroupTab('public-groups', this)">Public Groups</button>
+            </div>
+            <div id="my-groups" class="group-tab-content">
+                <div id="my-groups-list" class="groups-list"></div>
+            </div>
+            <div id="public-groups" class="group-tab-content hidden">
+                <div id="public-groups-list" class="groups-list"></div>
+            </div>
+        </div>
+    </div>
+
     <script src="fontStyles.js"></script>
     <script src="adminPanel.js"></script>
     <script src="enhancedFeatures.js"></script>
+    <script src="groupVideoFeatures.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
